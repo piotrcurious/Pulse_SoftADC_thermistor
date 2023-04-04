@@ -3,7 +3,7 @@
 // by Bing
 
 // Include the SoftADC library
-#include <SoftADC.h>
+#include <Pulse_SoftADC_thermistor.h>
 
 // Define the number of thermistors
 #define NUM_THERMISTORS 2
