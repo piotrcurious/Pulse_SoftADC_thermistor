@@ -157,22 +157,26 @@ void SoftADC_setActive(uint8_t channel, bool state) {
 }
 
 // Calculate the resistance of the thermistor from the pulse average using a linear approximation formula
-// R = k * N + b, where k and b are constants depending on the thermistor and capacitor values
+// R = k * N * T + b, where k and b are constants depending on the thermistor and capacitor values, and T is the pulse length in seconds
 float SoftADC_calculateResistance(uint8_t channel) {
   // Check if the channel is valid and active
   if (channel < MAX_CHANNELS && channels[channel].active) {
     // Define the constants k and b (change them according to your thermistor and capacitor values)
-    const float k = 0.01; // ohms per pulse
+    const float k = 0.01; // ohms per pulse per second
     const float b = 100.0; // ohms
     
     // Get the pulse average of the channel
     uint32_t N = SoftADC_read(channel);
     
+    // Convert the pulse length to seconds
+    float T = pulseLength / 1000000.0;
+    
     // Calculate and return the resistance of the thermistor
-    return k * N + b;
+    return k * N * T + b;
   } else {
     // Return zero as an error value
     return 0.0;
   }
 }
+
 
