@@ -128,8 +128,8 @@ void SoftADC_update() {
 uint32_t SoftADC_read(uint8_t channel) {
   // Check if the channel is valid and active
   if (channel < MAX_CHANNELS && channels[channel].active) {
-    // Return the sum of charge and discharge pulse averages of the channel
-    return channels[channel].chargeAverage + channels[channel].dischargeAverage;
+    // Return the average of charge and discharge pulse averages of the channel
+    return (channels[channel].chargeAverage + channels[channel].dischargeAverage) / 2;
   } else {
     // Return zero as an error value
     return 0;
