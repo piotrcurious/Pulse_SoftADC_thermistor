@@ -32,7 +32,7 @@ void loop() {
   digitalWrite(chargePin, HIGH); // Start the pulse
   delay(pulseWidth); // Wait for the pulse width
   pinMode(chargePin, INPUT); // End the pulse by setting the pin as input
-  
+  digitalWrite(chargePin, LOW); //disables pullup
   // Increment the pulse count
   pulseCount++;
   
